@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import {useSelector} from "react-redux";
+import {Redirect, NavLink, Route, Switch, Link} from 'react-router-dom';
+import {Weather} from "./Pages/weatherButton";
+import {Time} from "./Pages/timePages";
 
-function App() {
+const App = () => {
+
+  const {value} = useSelector(({appReducer}) => appReducer)
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Hello, make a choice</h2>
+      <div className='button-group'>
+        <NavLink to={'/time'}>
+          <button type="button" className="btn btn-light">
+            <h2>Time</h2>
+          </button>
+        </NavLink>
+        <NavLink to={'/weather'}>
+          <button type="button" className="btn btn-primary">
+            <h2>Weather</h2>
+          </button>
+        </NavLink>
+      </div>
+
+      <Switch>
+        <Route exact path={'/time'} render={() => <Time/>}/>
+        <Route exact path={'/weather'} render={() => <Weather/>}/>
+      </Switch>
+
     </div>
   );
 }
