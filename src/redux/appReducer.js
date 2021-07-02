@@ -33,7 +33,6 @@ export const setInfoWeather = (payload) => ({type: 'SET_INFO_WEATHER', payload})
 export const getCityWeather = (nameCity) => async (dispatch) => {
   try {
     let res = await api.getData(nameCity)
-    console.log(res)
     dispatch(setInfoWeather(res))
   } catch (e) {
     console.log(e)

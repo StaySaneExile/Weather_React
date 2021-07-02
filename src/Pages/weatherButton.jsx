@@ -11,7 +11,6 @@ export const Weather = () => {
   const {error, info} = useSelector(({appReducer}) => appReducer)
   const [inputValue, setInputValue] = useState('')
 
-  console.log(info)
 
   const onChangeInput = (e) => {
     setInputValue(e.target.value)
