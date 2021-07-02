@@ -1,24 +1,25 @@
-import {useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import '../styles/weather.css'
 import {getCityWeather} from "../redux/appReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logDOM} from "@testing-library/react";
 
 
-export const Weather = () => {
+export const Weather = React.memo(() => {
 
   const dispatch = useDispatch();
   const {error, info} = useSelector(({appReducer}) => appReducer)
   const [inputValue, setInputValue] = useState('')
 
 
-  const onChangeInput = (e) => {
+  const onChangeInput = useCallback((e) => {
     setInputValue(e.target.value)
-  }
-  const searchCity = () => {
+  }, [inputValue])
+
+  const searchCity = useCallback(() => {
     dispatch(getCityWeather(inputValue))
     setInputValue('')
-  }
+  },[inputValue])
 
 
   return (
@@ -59,4 +60,4 @@ export const Weather = () => {
 
     </div>
   )
-}
+})
